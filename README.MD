@@ -1,3 +1,3 @@
 # SCAMSHIELD
 
-[architecture design](docs/ARCHITECTURE.MD)
+* Visit [Architecture Design Documentation](DOCS/ARCHITECTURE.MD)
