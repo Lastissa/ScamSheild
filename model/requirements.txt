@@ -1,0 +1,11 @@
+# ScamShield - pinned library versions (hard rule 5: pin versions).
+# These are the exact versions the model was built and tested with.
+scikit-learn==1.9.1
+pandas==3.1.1
+numpy==2.5.1
+scipy==1.18.1
+joblib==1.6.0
+fastapi==0.162.2
+uvicorn==0.54.0
+pytest==9.2.0
+httpx==0.28.1
