@@ -139,7 +139,7 @@ def main() -> None:
 
     print("validation:", {k: res_val[k] for k in ("precision", "recall", "pr_auc", "false_positive_rate")})
     print("test      :", {k: res_test[k] for k in ("precision", "recall", "pr_auc", "false_positive_rate")})
-    print("real94    : recall@0.5", res_real["recall"], "recall@high(thr=0.334)", res_real_at_high["recall"])
+    print("real94    : recall@0.5", res_real["recall"], f"recall@high(thr={thr_high})", res_real_at_high["recall"])
     if res_legit:
         print("real_legit:", {k: res_legit[k] for k in ("precision", "recall", "f1", "false_positive_rate")})
 

@@ -68,19 +68,19 @@ det.predict("Hi Mom, I will be home by 6pm")
 
 | risk level | what it means | rule |
 |---|---|---|
-| high | looks like a scam; flag it | score >= 33 |
+| high | looks like a scam; flag it | score >= 60 |
 | low | looks benign | score <= 33 |
-| medium | in between | everything else |
+| medium | in between | everything else (34-59) |
 
 The score is `round(100 × the model's calibrated probability)`. It is a **risk
 score**, not the real-world chance that the message is a scam: the training
 data has far more scams than real life, so the numbers are calibrated to the
 training data, not to your inbox.
 
-On the data used to choose them (the validation split), "high" reached a
-precision of 0.9516 (target: at least 0.95) and at "low" the model still kept
-above 99% of scams above the cut-off. On this data the two cut-offs nearly
-meet, so most messages land in low or high.
+On the validation split used to choose them: "high" reached precision 0.9997
+(target ≥ 0.95) and at "low" the model still keeps 99.18% of scams above the
+cut-off (target ≥ 99%). There is a 27-point gap between the bands, so most
+messages land clearly in low or high.
 
 ## Six real example outputs
 
@@ -125,7 +125,7 @@ legitimate ones, so links help a little - but they are not the whole story.
   languages or styles are less reliable.
 - Almost all training data (about 29,650 messages) is synthetic, generated
   from templates, so very high scores on similar synthetic messages can just
-  mean template memorisation. Real-message recall was 0.9468 at the operating
+  mean template memorisation. Real-message recall was 0.617 at the operating
   threshold on 94 real scams.
 - No real legitimate messages were available for testing, so the false-alarm
   rate on real benign messages was **not measured**.

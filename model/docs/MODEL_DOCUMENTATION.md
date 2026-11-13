@@ -189,7 +189,7 @@ Evaluated on `artifacts/scam_model.joblib`:
 | validation | 0.9962 | 0.9599 | 0.9777 | 0.9944 | 0.9978 | 0.0078 | 0.0325 |
 | test | 0.9993 | 0.9579 | 0.9782 | 0.9991 | 0.9997 | 0.0014 | 0.0237 |
 | 94 real scams @ threshold 0.5 | - | 0.6702 | - | - | - | - | 0.1871 |
-| 94 real scams @ operating threshold (≥33) | - | 0.9468 | - | - | - | - | - |
+| 94 real scams @ operating threshold (≥60) | - | 0.617 | - | - | - | - | - |
 
 Real-legit messages file absent -> false-alarm rate on real legitimate messages
 NOT measured.
@@ -236,11 +236,11 @@ was flagged as scam).
 ### Template memorisation check
 
 Test PR-AUC is 0.9997 (above 0.99) while real-message recall at the operating
-threshold is 0.9468 - a gap of 0.053. Synthetic scores are near-perfect and
+threshold (≥60) is 0.617 - a gap of 0.383. Synthetic scores are near-perfect and
 real-message performance is lower, consistent with the data being mostly
 synthetic templates. At the fixed 0.5 threshold real recall is 0.6702 because
 calibrated probabilities sit in separated clusters; the operating threshold
-(score ≥ 33) is the meaningful one.
+(score ≥ 60) is the meaningful one.
 
 Full details in `docs/final_evaluation.md` and `data/processed/final_eval_meta.json`.
 
@@ -249,13 +249,13 @@ Full details in `docs/final_evaluation.md` and `data/processed/final_eval_meta.j
 `risk_score = round(100 × calibrated probability)`.
 
 Thresholds chosen on the validation set:
-- high: score ≥ 33 → validation precision at/above threshold 0.9516 (target ≥
+- high: score ≥ 60 → validation precision at/above threshold 0.9997 (target ≥
   0.95).
 - low: score ≤ 33 → 99.18% of validation scams score above it (target ≥ 99%).
-- medium: between.
+- medium: 34–59.
 
-On this data the two cut-offs nearly meet, so most messages land in low or
-high; the medium band is narrow.
+There is a 27-point gap between the bands, so the levels stay separated and the
+output fields (is_scam, risk_level, risk_score) always agree.
 
 The score is a **risk score**, not the real-world chance that a message is a
 scam, because the training data has far more scams than real life.
@@ -264,7 +264,7 @@ scam, because the training data has far more scams than real life.
 
 - Almost all training data is synthetic template output; very high scores can
   reflect memorised templates rather than general scam detection.
-- Real-message recall (0.9468 at operating threshold) is below synthetic test
+- Real-message recall (0.617 at operating threshold ≥60) is below synthetic test
   scores (PR-AUC 0.9997).
 - No real legitimate messages were available, so false alarms on real benign
   traffic were not measured.

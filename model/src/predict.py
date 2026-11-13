@@ -60,8 +60,10 @@ class ScamDetector:
         meta_path = ARTIFACTS_DIR / "model_meta.json"
         self._meta = json.loads(meta_path.read_text()) if meta_path.exists() else {}
         thr = self._meta.get("thresholds", {})
-        self._thr_high = float(thr.get("high_score", 0.5))
-        self._thr_low = float(thr.get("low_score", 0.2))
+        # Integer risk_score bands (0-100). These are the source of truth so
+        # is_scam, risk_level and risk_score always stay in sync.
+        self._high_score = int(thr.get("high_score_int", thr.get("high_score", 0.5) * 100))
+        self._low_score = int(thr.get("low_score_int", thr.get("low_score", 0.2) * 100))
 
         # ---- interpretation model for per-message word reasons ----
         # Same features as the trained pipeline + an uncalibrated LR, so each
@@ -130,9 +132,10 @@ class ScamDetector:
         return float(self._pipe.predict_proba([text])[0, 1])
 
     def _level(self, proba: float) -> str:
-        if proba >= self._thr_high:
+        score = round(100 * proba)
+        if score >= self._high_score:
             return "high"
-        if proba <= self._thr_low:
+        if score <= self._low_score:
             return "low"
         return "medium"
 
@@ -190,7 +193,7 @@ class ScamDetector:
         score = round(100 * proba)
         level = self._level(proba)
         return {
-            "is_scam": proba >= self._thr_high,
+            "is_scam": level == "high",
             "risk_score": score,
             "risk_level": level,
             "reasons": self._reasons(text, proba),

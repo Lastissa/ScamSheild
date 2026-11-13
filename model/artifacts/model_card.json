@@ -131,12 +131,15 @@
   },
   "calibration": "CalibratedClassifierCV (sigmoid, cv=3)",
   "thresholds": {
-    "high_score": 0.334,
-    "low_score": 0.333,
+    "high_score": 0.6,
+    "low_score": 0.33,
     "high_precision_target": 0.95,
     "low_scams_recall_target": 0.99,
-    "validation_precision_at_high": 0.9516,
-    "validation_scam_recall_above_low": 0.9918
+    "validation_precision_at_high": 0.9997,
+    "validation_scam_recall_above_low": 0.9918,
+    "high_score_int": 60,
+    "low_score_int": 33,
+    "gap_points": 27
   },
   "evaluation": {
     "validation": {

@@ -178,12 +178,15 @@
     }
   },
   "thresholds": {
-    "high_score": 0.334,
-    "low_score": 0.333,
+    "high_score": 0.6,
+    "low_score": 0.33,
     "high_precision_target": 0.95,
     "low_scams_recall_target": 0.99,
-    "validation_precision_at_high": 0.9516,
-    "validation_scam_recall_above_low": 0.9918
+    "validation_precision_at_high": 0.9997,
+    "validation_scam_recall_above_low": 0.9918,
+    "high_score_int": 60,
+    "low_score_int": 33,
+    "gap_points": 27
   },
   "top_features_scam": [
     [
@@ -441,5 +444,5 @@
       "kind": "miss"
     }
   ],
-  "memorization_note": "Test PR-AUC 0.9997 is above 0.99 while real-message recall at the operating threshold is 0.9468 (gap 0.053). Synthetic scores are near-perfect; real-message performance is lower, consistent with the data being mostly synthetic templates. At a fixed 0.5 threshold recall is 0.6702 because calibrated probabilities sit in separated clusters - the operating threshold 0.334 is the meaningful one."
+  "memorization_note": "Test PR-AUC 0.9997 is above 0.99 while real-message recall at the operating threshold is 0.617 (gap 0.383). Synthetic scores are near-perfect; real-message performance is lower, consistent with the data being mostly synthetic templates. At a fixed 0.5 threshold recall is 0.6702 because calibrated probabilities sit in separated clusters - the operating threshold 0.6 is the meaningful one."
 }

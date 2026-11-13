@@ -49,20 +49,20 @@ All numbers are real outputs of `src/step5_final_evaluation.py` on artifacts/sca
 | Brier score | 0.1871 |
 | confusion (tn, fp, fn, tp) | [0, 0, 31, 63] |
 
-## 94 real scam messages at operating threshold (0.334)
+## 94 real scam messages at operating threshold (0.6)
 
 | metric | value |
 |---|---|
 | rows | 94 |
 | scam rows | 94 |
 | precision | 1.0 |
-| recall | 0.9468 |
-| F1 | 0.9727 |
+| recall | 0.617 |
+| F1 | 0.7632 |
 | ROC-AUC | None |
 | PR-AUC | None |
 | false-positive rate | None |
 | Brier score | 0.1871 |
-| confusion (tn, fp, fn, tp) | [0, 0, 5, 89] |
+| confusion (tn, fp, fn, tp) | [0, 0, 36, 58] |
 
 ## real_legit_messages.csv
 File not present -> false-alarm rate on real legitimate messages **was NOT measured**, per the project spec.
@@ -86,9 +86,9 @@ Language is a rough word-list heuristic (see data_summary.md).
 
 ## Risk thresholds (chosen on validation, Step 6)
 
-- high risk: score >= 0.334 (validation precision at/above: 0.9516, target >= 0.95)
-- low risk: score <= 0.333 (>= 0.99 of validation scams score above it; actual 0.9918)
-- medium: between 0.333 and 0.334.
+- high risk: score >= 0.6 (validation precision at/above: 0.9997, target >= 0.95)
+- low risk: score <= 0.33 (>= 0.99 of validation scams score above it; actual 0.9918)
+- medium: between 0.33 and 0.6.
 The score is a *risk score*, not a real-world probability: the training data has far more scams than real life.
 
 ## 20 most influential features (interpretation model, uncalibrated LR)
@@ -192,4 +192,4 @@ Features with the largest positive coefficients push toward 'scam'; largest nega
 
 ## Template memorization check
 
-- Test PR-AUC 0.9997 is above 0.99 while real-message recall at the operating threshold is 0.9468 (gap 0.053). Synthetic scores are near-perfect; real-message performance is lower, consistent with the data being mostly synthetic templates. At a fixed 0.5 threshold recall is 0.6702 because calibrated probabilities sit in separated clusters - the operating threshold 0.334 is the meaningful one.
+- Test PR-AUC 0.9997 is above 0.99 while real-message recall at the operating threshold is 0.617 (gap 0.383). Synthetic scores are near-perfect; real-message performance is lower, consistent with the data being mostly synthetic templates. At a fixed 0.5 threshold recall is 0.6702 because calibrated probabilities sit in separated clusters - the operating threshold 0.6 is the meaningful one.
