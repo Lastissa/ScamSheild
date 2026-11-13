@@ -1,0 +1,98 @@
+{
+  "seed": 42,
+  "encoding": "utf-8-sig (fallback latin-1)",
+  "raw_rows": 29650,
+  "label_counts_raw": {
+    "1": 20260,
+    "0": 9390
+  },
+  "empty_text_rows": 0,
+  "duplicates_dropped": 0,
+  "real_overlap_dropped": 0,
+  "clean_rows": 29650,
+  "label_counts_clean": {
+    "1": 20260,
+    "0": 9390
+  },
+  "scam_share_clean": 0.6833,
+  "length_stats_by_label": {
+    "0": {
+      "mean": 198.6,
+      "median": 208.0,
+      "p10": 100.0,
+      "p90": 294.0
+    },
+    "1": {
+      "mean": 281.8,
+      "median": 302.0,
+      "p10": 146.9,
+      "p90": 374.0
+    }
+  },
+  "link_share_by_label": {
+    "0": 0.5656,
+    "1": 0.4823
+  },
+  "language_share_by_label": {
+    "0": {
+      "english": 0.8953,
+      "other": 0.0972,
+      "pidgin": 0.0075
+    },
+    "1": {
+      "english": 0.7196,
+      "other": 0.2478,
+      "pidgin": 0.0326
+    }
+  },
+  "sim_cutoff": 0.85,
+  "split_method": "greedy largest-first group assignment (deterministic; keeps every group whole; balances rows and scam share)",
+  "gss_reference_drift": 0.1224,
+  "n_groups": 1405,
+  "groups_size2plus": 627,
+  "rows_in_groups_size2plus": 28872,
+  "max_group_size": 929,
+  "max_group_share": 0.0313,
+  "group_size_histogram": {
+    "1": 778,
+    "2": 92,
+    "3": 74,
+    "4": 39,
+    "5": 17,
+    "6": 21,
+    "7": 15,
+    "8": 7,
+    "9": 16,
+    "10": 6
+  },
+  "split_rows": {
+    "train": 20755,
+    "test": 4448,
+    "validation": 4447
+  },
+  "scam_share_by_split": {
+    "test": 0.6832,
+    "train": 0.6833,
+    "validation": 0.6834
+  },
+  "leakage": {
+    "validation": {
+      "n": 4447,
+      "median_max_sim": 0.7532,
+      "mean_max_sim": 0.71,
+      "share_above_090": 0.0022,
+      "share_above_085": 0.0483
+    },
+    "test": {
+      "n": 4448,
+      "median_max_sim": 0.7648,
+      "mean_max_sim": 0.6807,
+      "share_above_090": 0.011,
+      "share_above_085": 0.1113
+    }
+  },
+  "leak_gate_pass": true,
+  "notes": [
+    "Plain random GroupShuffleSplit by group (spec's first choice, measured at cutoff 0.85) drifts 12.2% in scam share between parts, because near-duplicate groups chain into big template clusters (largest group = 3.1% of rows). A deterministic greedy largest-first group assignment is used instead; it keeps groups whole and balances rows and scam share."
+  ]
+}

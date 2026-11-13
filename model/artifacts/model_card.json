@@ -1,0 +1,741 @@
+{
+  "version": "1.0.0",
+  "training_date": "2026-11-12",
+  "library_versions": {
+    "python": "3.12.10",
+    "scikit-learn": "1.9.1",
+    "pandas": "3.1.1",
+    "numpy": "2.5.1",
+    "scipy": "1.18.1",
+    "joblib": "1.6.0",
+    "fastapi": "0.162.2",
+    "uvicorn": "0.54.0",
+    "pytest": "9.2.0",
+    "httpx": "0.28.1"
+  },
+  "data_files": {
+    "scam_dataset_text_label.csv": {
+      "rows": 29650,
+      "scam": 20260,
+      "benign": 9390,
+      "note": "almost all synthetic, template-generated"
+    },
+    "real_messages_test_text_label.csv": {
+      "rows": 94,
+      "scam": 94,
+      "benign": 0,
+      "note": "real scam messages only; final test set (recall only)"
+    },
+    "real_legit_messages.csv": {
+      "present": false,
+      "note": "absent -> false-alarm rate on real legitimate messages NOT measured"
+    }
+  },
+  "clean_data": {
+    "rows": 29650,
+    "scam": 20260,
+    "benign": 9390,
+    "scam_share": 0.6833,
+    "duplicates_dropped": 0,
+    "real_overlap_dropped": 0
+  },
+  "split": {
+    "method": "greedy largest-first group assignment (deterministic; keeps every group whole; balances rows and scam share)",
+    "seed": 42,
+    "similarity_cutoff": 0.85,
+    "groups": 1405,
+    "groups_with_2_plus": 627,
+    "rows_in_groups_size2_plus": 28872,
+    "max_group_size": 929,
+    "max_group_share": 0.0313,
+    "rows": {
+      "train": 20755,
+      "test": 4448,
+      "validation": 4447
+    },
+    "scam_share_by_split": {
+      "test": 0.6832,
+      "train": 0.6833,
+      "validation": 0.6834
+    },
+    "leakage_check": {
+      "validation": {
+        "n": 4447,
+        "median_max_sim": 0.7532,
+        "mean_max_sim": 0.71,
+        "share_above_090": 0.0022,
+        "share_above_085": 0.0483
+      },
+      "test": {
+        "n": 4448,
+        "median_max_sim": 0.7648,
+        "mean_max_sim": 0.6807,
+        "share_above_090": 0.011,
+        "share_above_085": 0.1113
+      }
+    },
+    "leak_gate": "pass",
+    "leak_gate_limit": 0.1,
+    "gss_reference_drift": 0.1224
+  },
+  "chosen_model": "linear_svm",
+  "candidate_comparison_validation": [
+    {
+      "model": "linear_svm",
+      "validation_precision": 0.9962,
+      "validation_recall": 0.9599,
+      "validation_pr_auc": 0.9978,
+      "validation_fpr": 0.0078,
+      "tp": 2917,
+      "fp": 11,
+      "fn": 122,
+      "tn": 1397
+    },
+    {
+      "model": "logistic_regression",
+      "validation_precision": 0.9721,
+      "validation_recall": 0.9753,
+      "validation_pr_auc": 0.9963,
+      "validation_fpr": 0.0604,
+      "tp": 2964,
+      "fp": 85,
+      "fn": 75,
+      "tn": 1323
+    },
+    {
+      "model": "naive_bayes",
+      "validation_precision": 0.9891,
+      "validation_recall": 0.952,
+      "validation_pr_auc": 0.9913,
+      "validation_fpr": 0.0227,
+      "tp": 2893,
+      "fp": 32,
+      "fn": 146,
+      "tn": 1376
+    }
+  ],
+  "features": {
+    "text": [
+      "word TF-IDF 1-2 grams",
+      "char TF-IDF 3-5 grams"
+    ],
+    "links": [
+      "has_link",
+      "n_links",
+      "is_shortener",
+      "hyphen_host",
+      "n_subdomains",
+      "digit_in_host",
+      "tld_risk"
+    ]
+  },
+  "calibration": "CalibratedClassifierCV (sigmoid, cv=3)",
+  "thresholds": {
+    "high_score": 0.334,
+    "low_score": 0.333,
+    "high_precision_target": 0.95,
+    "low_scams_recall_target": 0.99,
+    "validation_precision_at_high": 0.9516,
+    "validation_scam_recall_above_low": 0.9918
+  },
+  "evaluation": {
+    "validation": {
+      "n": 4447,
+      "positives": 3039,
+      "tp": 2917,
+      "fp": 11,
+      "fn": 122,
+      "tn": 1397,
+      "precision": 0.9962,
+      "recall": 0.9599,
+      "f1": 0.9777,
+      "roc_auc": 0.9944,
+      "pr_auc": 0.9978,
+      "false_positive_rate": 0.0078,
+      "brier": 0.0325,
+      "confusion": [
+        1397,
+        11,
+        122,
+        2917
+      ]
+    },
+    "test": {
+      "n": 4448,
+      "positives": 3039,
+      "tp": 2911,
+      "fp": 2,
+      "fn": 128,
+      "tn": 1407,
+      "precision": 0.9993,
+      "recall": 0.9579,
+      "f1": 0.9782,
+      "roc_auc": 0.9991,
+      "pr_auc": 0.9997,
+      "false_positive_rate": 0.0014,
+      "brier": 0.0237,
+      "confusion": [
+        1407,
+        2,
+        128,
+        2911
+      ]
+    },
+    "real_94_messages": {
+      "n": 94,
+      "positives": 94,
+      "tp": 63,
+      "fp": 0,
+      "fn": 31,
+      "tn": 0,
+      "precision": 1.0,
+      "recall": 0.6702,
+      "f1": 0.8025,
+      "roc_auc": null,
+      "pr_auc": null,
+      "false_positive_rate": null,
+      "brier": 0.1871,
+      "confusion": [
+        0,
+        0,
+        31,
+        63
+      ]
+    },
+    "real_legit_messages": null,
+    "by_language_validation": {
+      "english": {
+        "n": 3257,
+        "positives": 2204,
+        "tp": 2082,
+        "fp": 9,
+        "fn": 122,
+        "tn": 1044,
+        "precision": 0.9957,
+        "recall": 0.9446,
+        "f1": 0.9695,
+        "roc_auc": 0.9927,
+        "pr_auc": 0.9971,
+        "false_positive_rate": 0.0085,
+        "brier": 0.0359,
+        "confusion": [
+          1044,
+          9,
+          122,
+          2082
+        ],
+        "rows": 3257
+      },
+      "pidgin": {
+        "n": 147,
+        "positives": 147,
+        "tp": 147,
+        "fp": 0,
+        "fn": 0,
+        "tn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "roc_auc": null,
+        "pr_auc": null,
+        "false_positive_rate": null,
+        "brier": 0.0424,
+        "confusion": [
+          0,
+          0,
+          0,
+          147
+        ],
+        "rows": 147
+      },
+      "other": {
+        "n": 1043,
+        "positives": 688,
+        "tp": 688,
+        "fp": 2,
+        "fn": 0,
+        "tn": 353,
+        "precision": 0.9971,
+        "recall": 1.0,
+        "f1": 0.9985,
+        "roc_auc": 1.0,
+        "pr_auc": 1.0,
+        "false_positive_rate": 0.0056,
+        "brier": 0.0205,
+        "confusion": [
+          353,
+          2,
+          0,
+          688
+        ],
+        "rows": 1043
+      }
+    },
+    "by_language_test": {
+      "english": {
+        "n": 3201,
+        "positives": 1962,
+        "tp": 1836,
+        "fp": 2,
+        "fn": 126,
+        "tn": 1237,
+        "precision": 0.9989,
+        "recall": 0.9358,
+        "f1": 0.9663,
+        "roc_auc": 0.9986,
+        "pr_auc": 0.9993,
+        "false_positive_rate": 0.0016,
+        "brier": 0.0302,
+        "confusion": [
+          1237,
+          2,
+          126,
+          1836
+        ],
+        "rows": 3201
+      },
+      "other": {
+        "n": 1247,
+        "positives": 1077,
+        "tp": 1075,
+        "fp": 0,
+        "fn": 2,
+        "tn": 170,
+        "precision": 1.0,
+        "recall": 0.9981,
+        "f1": 0.9991,
+        "roc_auc": 1.0,
+        "pr_auc": 1.0,
+        "false_positive_rate": 0.0,
+        "brier": 0.0068,
+        "confusion": [
+          170,
+          0,
+          2,
+          1075
+        ],
+        "rows": 1247
+      }
+    }
+  },
+  "baseline_step2": {
+    "model": "baseline: word TF-IDF (1-2) + char TF-IDF (3-5) + logistic regression",
+    "seed": 42,
+    "validation": {
+      "threshold": 0.5,
+      "n": 4447,
+      "positives": 3039,
+      "tp": 3010,
+      "fp": 13,
+      "fn": 29,
+      "tn": 1395,
+      "precision": 0.9957,
+      "recall": 0.9905,
+      "f1": 0.9931,
+      "false_positive_rate": 0.0092,
+      "brier": 0.0219,
+      "roc_auc": 0.9995,
+      "pr_auc": 0.9998,
+      "confusion": "tn=1395 fp=13 fn=29 tp=3010"
+    },
+    "test": {
+      "threshold": 0.5,
+      "n": 4448,
+      "positives": 3039,
+      "tp": 3006,
+      "fp": 0,
+      "fn": 33,
+      "tn": 1409,
+      "precision": 1.0,
+      "recall": 0.9891,
+      "f1": 0.9945,
+      "false_positive_rate": 0.0,
+      "brier": 0.0103,
+      "roc_auc": 1.0,
+      "pr_auc": 1.0,
+      "confusion": "tn=1409 fp=0 fn=33 tp=3006"
+    },
+    "real_94_recall_only": {
+      "threshold": 0.5,
+      "n": 94,
+      "positives": 94,
+      "tp": 88,
+      "fp": 0,
+      "fn": 6,
+      "tn": 0,
+      "precision": 1.0,
+      "recall": 0.9362,
+      "f1": 0.967,
+      "false_positive_rate": null,
+      "brier": 0.0643,
+      "roc_auc": null,
+      "pr_auc": null,
+      "confusion": "tn=0 fp=0 fn=6 tp=88"
+    },
+    "by_language": {
+      "validation": {
+        "english": {
+          "threshold": 0.5,
+          "n": 3257,
+          "positives": 2204,
+          "tp": 2175,
+          "fp": 9,
+          "fn": 29,
+          "tn": 1044,
+          "precision": 0.9959,
+          "recall": 0.9868,
+          "f1": 0.9913,
+          "false_positive_rate": 0.0085,
+          "brier": 0.0235,
+          "roc_auc": 0.9993,
+          "pr_auc": 0.9997
+        },
+        "pidgin": {
+          "threshold": 0.5,
+          "n": 147,
+          "positives": 147,
+          "tp": 147,
+          "fp": 0,
+          "fn": 0,
+          "tn": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "false_positive_rate": null,
+          "brier": 0.0119,
+          "roc_auc": null,
+          "pr_auc": null
+        },
+        "other": {
+          "threshold": 0.5,
+          "n": 1043,
+          "positives": 688,
+          "tp": 688,
+          "fp": 4,
+          "fn": 0,
+          "tn": 351,
+          "precision": 0.9942,
+          "recall": 1.0,
+          "f1": 0.9971,
+          "false_positive_rate": 0.0113,
+          "brier": 0.0183,
+          "roc_auc": 1.0,
+          "pr_auc": 1.0
+        }
+      },
+      "test": {
+        "english": {
+          "threshold": 0.5,
+          "n": 3201,
+          "positives": 1962,
+          "tp": 1929,
+          "fp": 0,
+          "fn": 33,
+          "tn": 1239,
+          "precision": 1.0,
+          "recall": 0.9832,
+          "f1": 0.9915,
+          "false_positive_rate": 0.0,
+          "brier": 0.0132,
+          "roc_auc": 1.0,
+          "pr_auc": 1.0
+        },
+        "other": {
+          "threshold": 0.5,
+          "n": 1247,
+          "positives": 1077,
+          "tp": 1077,
+          "fp": 0,
+          "fn": 0,
+          "tn": 170,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "false_positive_rate": 0.0,
+          "brier": 0.003,
+          "roc_auc": 1.0,
+          "pr_auc": 1.0
+        }
+      }
+    }
+  },
+  "link_dependency_step3": {
+    "runs": {
+      "A": {
+        "validation": {
+          "threshold": 0.5,
+          "n": 4447,
+          "positives": 3039,
+          "tp": 3010,
+          "fp": 13,
+          "fn": 29,
+          "tn": 1395,
+          "precision": 0.9957,
+          "recall": 0.9905,
+          "f1": 0.9931,
+          "false_positive_rate": 0.0092,
+          "brier": 0.0219,
+          "roc_auc": 0.9995,
+          "pr_auc": 0.9998
+        },
+        "test": {
+          "threshold": 0.5,
+          "n": 4448,
+          "positives": 3039,
+          "tp": 3006,
+          "fp": 0,
+          "fn": 33,
+          "tn": 1409,
+          "precision": 1.0,
+          "recall": 0.9891,
+          "f1": 0.9945,
+          "false_positive_rate": 0.0,
+          "brier": 0.0103,
+          "roc_auc": 1.0,
+          "pr_auc": 1.0
+        },
+        "real": {
+          "threshold": 0.5,
+          "n": 94,
+          "positives": 94,
+          "tp": 88,
+          "fp": 0,
+          "fn": 6,
+          "tn": 0,
+          "precision": 1.0,
+          "recall": 0.9362,
+          "f1": 0.967,
+          "false_positive_rate": null,
+          "brier": 0.0643,
+          "roc_auc": null,
+          "pr_auc": null
+        }
+      },
+      "B": {
+        "validation": {
+          "threshold": 0.5,
+          "n": 4447,
+          "positives": 3039,
+          "tp": 2994,
+          "fp": 16,
+          "fn": 45,
+          "tn": 1392,
+          "precision": 0.9947,
+          "recall": 0.9852,
+          "f1": 0.9899,
+          "false_positive_rate": 0.0114,
+          "brier": 0.0309,
+          "roc_auc": 0.9976,
+          "pr_auc": 0.999
+        },
+        "test": {
+          "threshold": 0.5,
+          "n": 4448,
+          "positives": 3039,
+          "tp": 2994,
+          "fp": 0,
+          "fn": 45,
+          "tn": 1409,
+          "precision": 1.0,
+          "recall": 0.9852,
+          "f1": 0.9925,
+          "false_positive_rate": 0.0,
+          "brier": 0.0172,
+          "roc_auc": 0.999,
+          "pr_auc": 0.9995
+        },
+        "real": {
+          "threshold": 0.5,
+          "n": 94,
+          "positives": 94,
+          "tp": 88,
+          "fp": 0,
+          "fn": 6,
+          "tn": 0,
+          "precision": 1.0,
+          "recall": 0.9362,
+          "f1": 0.967,
+          "false_positive_rate": null,
+          "brier": 0.0627,
+          "roc_auc": null,
+          "pr_auc": null
+        }
+      },
+      "C": {
+        "validation": {
+          "threshold": 0.5,
+          "n": 4447,
+          "positives": 3039,
+          "tp": 2962,
+          "fp": 0,
+          "fn": 77,
+          "tn": 1408,
+          "precision": 1.0,
+          "recall": 0.9747,
+          "f1": 0.9872,
+          "false_positive_rate": 0.0,
+          "brier": 0.0286,
+          "roc_auc": 0.9964,
+          "pr_auc": 0.9985
+        },
+        "test": {
+          "threshold": 0.5,
+          "n": 4448,
+          "positives": 3039,
+          "tp": 2924,
+          "fp": 0,
+          "fn": 115,
+          "tn": 1409,
+          "precision": 1.0,
+          "recall": 0.9622,
+          "f1": 0.9807,
+          "false_positive_rate": 0.0,
+          "brier": 0.0189,
+          "roc_auc": 0.9995,
+          "pr_auc": 0.9998
+        },
+        "real": {
+          "threshold": 0.5,
+          "n": 94,
+          "positives": 94,
+          "tp": 87,
+          "fp": 0,
+          "fn": 7,
+          "tn": 0,
+          "precision": 1.0,
+          "recall": 0.9255,
+          "f1": 0.9613,
+          "false_positive_rate": null,
+          "brier": 0.0793,
+          "roc_auc": null,
+          "pr_auc": null
+        }
+      }
+    },
+    "examples": [
+      {
+        "text": "Chevron Nigeria 2026 graduate trainee programme. Apply at https://chevronportal.cc/portal?id=21XuRl. A refundable NGN 3,500 registration fee is required.",
+        "label": 1,
+        "stripped": "Chevron Nigeria 2026 graduate trainee programme. Apply at [URL]. A refundable NGN 3,500 registration fee is required.",
+        "prob_A": 0.5673,
+        "prob_C": 0.4366,
+        "pred_A": 1,
+        "pred_C": 0,
+        "links_found": [
+          "https://chevronportal.cc/portal?id=21XuRl"
+        ]
+      },
+      {
+        "text": "Hello Zainab, we are from Access Bank. Please send the code you just received so we can reverse the wrong debit of NGN 232,500.",
+        "label": 1,
+        "stripped": "Hello Zainab, we are from Access Bank. Please send the code you just received so we can reverse the wrong debit of NGN 232,500.",
+        "prob_A": 0.5636,
+        "prob_C": 0.4884,
+        "pred_A": 1,
+        "pred_C": 0,
+        "links_found": []
+      },
+      {
+        "text": "You received NGN 173,500 from Aisha. Claim it before it expires: http://accessbankhelp.vip",
+        "label": 1,
+        "stripped": "You received NGN 173,500 from Aisha. Claim it before it expires: [URL]",
+        "prob_A": 0.5091,
+        "prob_C": 0.265,
+        "pred_A": 1,
+        "pred_C": 0,
+        "links_found": [
+          "http://accessbankhelp.vip"
+        ]
+      },
+      {
+        "text": "Chevron Nigeria 2026 graduate trainee programme. Apply at http://chevr0n.com. A refundable NGN 8,500 registration fee is required.",
+        "label": 1,
+        "stripped": "Chevron Nigeria 2026 graduate trainee programme. Apply at [URL]. A refundable NGN 8,500 registration fee is required.",
+        "prob_A": 0.6149,
+        "prob_C": 0.4313,
+        "pred_A": 1,
+        "pred_C": 0,
+        "links_found": [
+          "http://chevr0n.com"
+        ]
+      },
+      {
+        "text": "Hello Zainab, we are from Access Bank. Please send the code you just received so we can reverse the wrong debit of NGN 39,500.",
+        "label": 1,
+        "stripped": "Hello Zainab, we are from Access Bank. Please send the code you just received so we can reverse the wrong debit of NGN 39,500.",
+        "prob_A": 0.5682,
+        "prob_C": 0.4949,
+        "pred_A": 1,
+        "pred_C": 0,
+        "links_found": []
+      },
+      {
+        "text": "Dangote Nigeria 2026 graduate trainee programme. Apply at http://dangote-confirm.com/confirm. A refundable NGN 13,000 registration fee is required.",
+        "label": 1,
+        "stripped": "Dangote Nigeria 2026 graduate trainee programme. Apply at [URL]. A refundable NGN 13,000 registration fee is required.",
+        "prob_A": 0.8082,
+        "prob_C": 0.4703,
+        "pred_A": 1,
+        "pred_C": 0,
+        "links_found": [
+          "http://dangote-confirm.com/confirm"
+        ]
+      },
+      {
+        "text": "Chevron Nigeria 2026 graduate trainee programme. Apply at tinyurl.com/CZEWtvN. A refundable NGN 11,500 registration fee is required.",
+        "label": 1,
+        "stripped": "Chevron Nigeria 2026 graduate trainee programme. Apply at [URL]. A refundable NGN 11,500 registration fee is required.",
+        "prob_A": 0.6476,
+        "prob_C": 0.4581,
+        "pred_A": 1,
+        "pred_C": 0,
+        "links_found": [
+          "tinyurl.com/CZEWtvN"
+        ]
+      },
+      {
+        "text": "Hello Damilola, we are from Wema Bank. Please send the code you just received so we can reverse the wrong debit of NGN 58,000.",
+        "label": 1,
+        "stripped": "Hello Damilola, we are from Wema Bank. Please send the code you just received so we can reverse the wrong debit of NGN 58,000.",
+        "prob_A": 0.5173,
+        "prob_C": 0.4425,
+        "pred_A": 1,
+        "pred_C": 0,
+        "links_found": []
+      },
+      {
+        "text": "You received NGN 43,000 from Hauwa. Claim it before it expires: http://secure-uba.com",
+        "label": 1,
+        "stripped": "You received NGN 43,000 from Hauwa. Claim it before it expires: [URL]",
+        "prob_A": 0.5049,
+        "prob_C": 0.2883,
+        "pred_A": 1,
+        "pred_C": 0,
+        "links_found": [
+          "http://secure-uba.com"
+        ]
+      },
+      {
+        "text": "Dangote Nigeria 2026 graduate trainee programme. Apply at http://dangote-ng.com. A refundable NGN 3,500 registration fee is required.",
+        "label": 1,
+        "stripped": "Dangote Nigeria 2026 graduate trainee programme. Apply at [URL]. A refundable NGN 3,500 registration fee is required.",
+        "prob_A": 0.6407,
+        "prob_C": 0.4452,
+        "pred_A": 1,
+        "pred_C": 0,
+        "links_found": [
+          "http://dangote-ng.com"
+        ]
+      }
+    ],
+    "conclusion": [
+      "NO COLLAPSE: Run C stays close to Run A (PR-AUC change 0.00 points if defined; real recall change 0.01). The model learns from wording, not only from links."
+    ],
+    "drops": {
+      "run_B_pr_drop": 0.0004999999999999449,
+      "run_C_pr_drop": 0.00019999999999997797,
+      "run_B_real_drop": 0.0,
+      "run_C_real_drop": 0.010700000000000043
+    }
+  }
+}

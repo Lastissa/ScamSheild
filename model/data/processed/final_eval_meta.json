@@ -1,0 +1,445 @@
+{
+  "validation": {
+    "n": 4447,
+    "positives": 3039,
+    "tp": 2917,
+    "fp": 11,
+    "fn": 122,
+    "tn": 1397,
+    "precision": 0.9962,
+    "recall": 0.9599,
+    "f1": 0.9777,
+    "roc_auc": 0.9944,
+    "pr_auc": 0.9978,
+    "false_positive_rate": 0.0078,
+    "brier": 0.0325,
+    "confusion": [
+      1397,
+      11,
+      122,
+      2917
+    ]
+  },
+  "test": {
+    "n": 4448,
+    "positives": 3039,
+    "tp": 2911,
+    "fp": 2,
+    "fn": 128,
+    "tn": 1407,
+    "precision": 0.9993,
+    "recall": 0.9579,
+    "f1": 0.9782,
+    "roc_auc": 0.9991,
+    "pr_auc": 0.9997,
+    "false_positive_rate": 0.0014,
+    "brier": 0.0237,
+    "confusion": [
+      1407,
+      2,
+      128,
+      2911
+    ]
+  },
+  "real_94": {
+    "n": 94,
+    "positives": 94,
+    "tp": 63,
+    "fp": 0,
+    "fn": 31,
+    "tn": 0,
+    "precision": 1.0,
+    "recall": 0.6702,
+    "f1": 0.8025,
+    "roc_auc": null,
+    "pr_auc": null,
+    "false_positive_rate": null,
+    "brier": 0.1871,
+    "confusion": [
+      0,
+      0,
+      31,
+      63
+    ]
+  },
+  "real_legit": null,
+  "by_language_validation": {
+    "english": {
+      "n": 3257,
+      "positives": 2204,
+      "tp": 2082,
+      "fp": 9,
+      "fn": 122,
+      "tn": 1044,
+      "precision": 0.9957,
+      "recall": 0.9446,
+      "f1": 0.9695,
+      "roc_auc": 0.9927,
+      "pr_auc": 0.9971,
+      "false_positive_rate": 0.0085,
+      "brier": 0.0359,
+      "confusion": [
+        1044,
+        9,
+        122,
+        2082
+      ],
+      "rows": 3257
+    },
+    "pidgin": {
+      "n": 147,
+      "positives": 147,
+      "tp": 147,
+      "fp": 0,
+      "fn": 0,
+      "tn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "roc_auc": null,
+      "pr_auc": null,
+      "false_positive_rate": null,
+      "brier": 0.0424,
+      "confusion": [
+        0,
+        0,
+        0,
+        147
+      ],
+      "rows": 147
+    },
+    "other": {
+      "n": 1043,
+      "positives": 688,
+      "tp": 688,
+      "fp": 2,
+      "fn": 0,
+      "tn": 353,
+      "precision": 0.9971,
+      "recall": 1.0,
+      "f1": 0.9985,
+      "roc_auc": 1.0,
+      "pr_auc": 1.0,
+      "false_positive_rate": 0.0056,
+      "brier": 0.0205,
+      "confusion": [
+        353,
+        2,
+        0,
+        688
+      ],
+      "rows": 1043
+    }
+  },
+  "by_language_test": {
+    "english": {
+      "n": 3201,
+      "positives": 1962,
+      "tp": 1836,
+      "fp": 2,
+      "fn": 126,
+      "tn": 1237,
+      "precision": 0.9989,
+      "recall": 0.9358,
+      "f1": 0.9663,
+      "roc_auc": 0.9986,
+      "pr_auc": 0.9993,
+      "false_positive_rate": 0.0016,
+      "brier": 0.0302,
+      "confusion": [
+        1237,
+        2,
+        126,
+        1836
+      ],
+      "rows": 3201
+    },
+    "other": {
+      "n": 1247,
+      "positives": 1077,
+      "tp": 1075,
+      "fp": 0,
+      "fn": 2,
+      "tn": 170,
+      "precision": 1.0,
+      "recall": 0.9981,
+      "f1": 0.9991,
+      "roc_auc": 1.0,
+      "pr_auc": 1.0,
+      "false_positive_rate": 0.0,
+      "brier": 0.0068,
+      "confusion": [
+        170,
+        0,
+        2,
+        1075
+      ],
+      "rows": 1247
+    }
+  },
+  "thresholds": {
+    "high_score": 0.334,
+    "low_score": 0.333,
+    "high_precision_target": 0.95,
+    "low_scams_recall_target": 0.99,
+    "validation_precision_at_high": 0.9516,
+    "validation_scam_recall_above_low": 0.9918
+  },
+  "top_features_scam": [
+    [
+      "links__links__hyphen_host",
+      3.1174
+    ],
+    [
+      "text__word__to",
+      2.7254
+    ],
+    [
+      "links__links__is_shortener",
+      2.4475
+    ],
+    [
+      "links__links__tld_risk",
+      1.6902
+    ],
+    [
+      "text__word__now",
+      1.6245
+    ],
+    [
+      "text__word__fee",
+      1.5113
+    ],
+    [
+      "text__word__de",
+      1.446
+    ],
+    [
+      "text__word__need",
+      1.4417
+    ],
+    [
+      "text__word__confirm",
+      1.4367
+    ],
+    [
+      "text__word__http",
+      1.3916
+    ],
+    [
+      "text__word__id",
+      1.3597
+    ],
+    [
+      "text__word__pay",
+      1.3244
+    ],
+    [
+      "text__word__and",
+      1.2627
+    ],
+    [
+      "text__word__pay ngn",
+      1.1811
+    ],
+    [
+      "text__word__please",
+      1.1669
+    ],
+    [
+      "text__word__send",
+      1.144
+    ],
+    [
+      "text__word__verify",
+      1.1064
+    ],
+    [
+      "text__word__deposit",
+      1.1059
+    ],
+    [
+      "text__char__ i ",
+      1.0933
+    ],
+    [
+      "text__word__we",
+      1.046
+    ]
+  ],
+  "top_features_benign": [
+    [
+      "text__word__https",
+      -2.011
+    ],
+    [
+      "text__word__app",
+      -1.5821
+    ],
+    [
+      "text__word__any",
+      -1.4537
+    ],
+    [
+      "text__word__amt ngn",
+      -1.3215
+    ],
+    [
+      "text__word__amt",
+      -1.3215
+    ],
+    [
+      "text__word__token",
+      -1.3067
+    ],
+    [
+      "text__word__kwh",
+      -1.3067
+    ],
+    [
+      "text__word__any time",
+      -1.2928
+    ],
+    [
+      "text__word__no",
+      -1.2841
+    ],
+    [
+      "text__word__careers",
+      -1.2753
+    ],
+    [
+      "text__word__apply",
+      -1.2695
+    ],
+    [
+      "text__word__is",
+      -1.2346
+    ],
+    [
+      "text__word__on",
+      -1.2318
+    ],
+    [
+      "text__word__meter",
+      -1.2163
+    ],
+    [
+      "text__word__view",
+      -1.211
+    ],
+    [
+      "links__links__n_subdomains",
+      -1.042
+    ],
+    [
+      "text__word__at https",
+      -0.9859
+    ],
+    [
+      "text__word__is ngn",
+      -0.9741
+    ],
+    [
+      "text__word__the app",
+      -0.9722
+    ],
+    [
+      "text__word__bluepeak",
+      -0.9646
+    ]
+  ],
+  "errors": [
+    {
+      "text": "Meridian Financial: detectamos atividade incomum em sua conta. Verifique sua identidade agora em https://meridianfinnancia.net/support ou ligue para +1-305-555-0121, ou sua conta ser\u00e1 suspensa hoje.",
+      "truth": 1,
+      "probability": 0.4753,
+      "kind": "miss"
+    },
+    {
+      "text": "Ledger & Co. Bank: detectamos atividade incomum em sua conta. Verifique sua identidade agora em https://ledgercboank.com/bvn ou ligue para +1-202-555-0172, ou sua conta ser\u00e1 suspensa em 24 horas.",
+      "truth": 1,
+      "probability": 0.4463,
+      "kind": "miss"
+    },
+    {
+      "text": "Falcon Parcel Network: delivery completed, left at your front door. Track your package any time using the reference number above on our website. Contact support through the app if anything looks wrong. This is an automated notification. Track it here: https://www.falcon-parcel-network.ng/track",
+      "truth": 0,
+      "probability": 0.5041,
+      "kind": "false alarm"
+    },
+    {
+      "text": "Delivery completed, left at your front door. No signature was required for this delivery. Contact support through the app if anything looks wrong. Thanks for choosing Falcon Parcel Network. Track it here: https://rb.gy/5x6aUGY - Falcon Parcel Network",
+      "truth": 0,
+      "probability": 0.5948,
+      "kind": "false alarm"
+    },
+    {
+      "text": "Chevron Nigeria 2026 graduate trainee programme. Apply at https://chevronportal.cc/portal?id=21XuRl. A refundable NGN 3,500 registration fee is required.",
+      "truth": 1,
+      "probability": 0.3486,
+      "kind": "miss"
+    },
+    {
+      "text": "Hello Zainab, we are from Access Bank. Please send the code you just received so we can reverse the wrong debit of NGN 232,500.",
+      "truth": 1,
+      "probability": 0.3634,
+      "kind": "miss"
+    },
+    {
+      "text": "You received NGN 173,500 from Aisha. Claim it before it expires: http://accessbankhelp.vip",
+      "truth": 1,
+      "probability": 0.3338,
+      "kind": "miss"
+    },
+    {
+      "text": "Chevron Nigeria 2026 graduate trainee programme. Apply at http://chevr0n.com. A refundable NGN 8,500 registration fee is required.",
+      "truth": 1,
+      "probability": 0.3551,
+      "kind": "miss"
+    },
+    {
+      "text": "Hello Ibrahim, we are from First Bank. Please send the code you just received so we can reverse the wrong debit of NGN 136,500.",
+      "truth": 1,
+      "probability": 0.3766,
+      "kind": "miss"
+    },
+    {
+      "text": "Hello Temitope, we are from Wema Bank. Please send the code you just received so we can reverse the wrong debit of NGN 232,500.",
+      "truth": 1,
+      "probability": 0.3527,
+      "kind": "miss"
+    },
+    {
+      "text": "Hello Zainab, we are from Access Bank. Please send the code you just received so we can reverse the wrong debit of NGN 39,500.",
+      "truth": 1,
+      "probability": 0.3673,
+      "kind": "miss"
+    },
+    {
+      "text": "UBA Alert: Your ATM card has been blocked. Reactivate immediately: https://ubagroup.com.secure-yxw5.com/claim",
+      "truth": 1,
+      "probability": 0.484,
+      "kind": "miss"
+    },
+    {
+      "text": "Hello Damilola, we are from Wema Bank. Please send the code you just received so we can reverse the wrong debit of NGN 58,000.",
+      "truth": 1,
+      "probability": 0.3671,
+      "kind": "miss"
+    },
+    {
+      "text": "You received NGN 43,000 from Hauwa. Claim it before it expires: http://secure-uba.com",
+      "truth": 1,
+      "probability": 0.3383,
+      "kind": "miss"
+    },
+    {
+      "text": "Chevron Nigeria 2026 graduate trainee programme. Apply at https://rb.gy/dA27OJs. A refundable NGN 18,000 registration fee is required.",
+      "truth": 1,
+      "probability": 0.3892,
+      "kind": "miss"
+    }
+  ],
+  "memorization_note": "Test PR-AUC 0.9997 is above 0.99 while real-message recall at the operating threshold is 0.9468 (gap 0.053). Synthetic scores are near-perfect; real-message performance is lower, consistent with the data being mostly synthetic templates. At a fixed 0.5 threshold recall is 0.6702 because calibrated probabilities sit in separated clusters - the operating threshold 0.334 is the meaningful one."
+}

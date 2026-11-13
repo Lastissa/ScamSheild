@@ -1,0 +1,279 @@
+{
+  "runs": {
+    "A": {
+      "validation": {
+        "threshold": 0.5,
+        "n": 4447,
+        "positives": 3039,
+        "tp": 3010,
+        "fp": 13,
+        "fn": 29,
+        "tn": 1395,
+        "precision": 0.9957,
+        "recall": 0.9905,
+        "f1": 0.9931,
+        "false_positive_rate": 0.0092,
+        "brier": 0.0219,
+        "roc_auc": 0.9995,
+        "pr_auc": 0.9998
+      },
+      "test": {
+        "threshold": 0.5,
+        "n": 4448,
+        "positives": 3039,
+        "tp": 3006,
+        "fp": 0,
+        "fn": 33,
+        "tn": 1409,
+        "precision": 1.0,
+        "recall": 0.9891,
+        "f1": 0.9945,
+        "false_positive_rate": 0.0,
+        "brier": 0.0103,
+        "roc_auc": 1.0,
+        "pr_auc": 1.0
+      },
+      "real": {
+        "threshold": 0.5,
+        "n": 94,
+        "positives": 94,
+        "tp": 88,
+        "fp": 0,
+        "fn": 6,
+        "tn": 0,
+        "precision": 1.0,
+        "recall": 0.9362,
+        "f1": 0.967,
+        "false_positive_rate": null,
+        "brier": 0.0643,
+        "roc_auc": null,
+        "pr_auc": null
+      }
+    },
+    "B": {
+      "validation": {
+        "threshold": 0.5,
+        "n": 4447,
+        "positives": 3039,
+        "tp": 2994,
+        "fp": 16,
+        "fn": 45,
+        "tn": 1392,
+        "precision": 0.9947,
+        "recall": 0.9852,
+        "f1": 0.9899,
+        "false_positive_rate": 0.0114,
+        "brier": 0.0309,
+        "roc_auc": 0.9976,
+        "pr_auc": 0.999
+      },
+      "test": {
+        "threshold": 0.5,
+        "n": 4448,
+        "positives": 3039,
+        "tp": 2994,
+        "fp": 0,
+        "fn": 45,
+        "tn": 1409,
+        "precision": 1.0,
+        "recall": 0.9852,
+        "f1": 0.9925,
+        "false_positive_rate": 0.0,
+        "brier": 0.0172,
+        "roc_auc": 0.999,
+        "pr_auc": 0.9995
+      },
+      "real": {
+        "threshold": 0.5,
+        "n": 94,
+        "positives": 94,
+        "tp": 88,
+        "fp": 0,
+        "fn": 6,
+        "tn": 0,
+        "precision": 1.0,
+        "recall": 0.9362,
+        "f1": 0.967,
+        "false_positive_rate": null,
+        "brier": 0.0627,
+        "roc_auc": null,
+        "pr_auc": null
+      }
+    },
+    "C": {
+      "validation": {
+        "threshold": 0.5,
+        "n": 4447,
+        "positives": 3039,
+        "tp": 2962,
+        "fp": 0,
+        "fn": 77,
+        "tn": 1408,
+        "precision": 1.0,
+        "recall": 0.9747,
+        "f1": 0.9872,
+        "false_positive_rate": 0.0,
+        "brier": 0.0286,
+        "roc_auc": 0.9964,
+        "pr_auc": 0.9985
+      },
+      "test": {
+        "threshold": 0.5,
+        "n": 4448,
+        "positives": 3039,
+        "tp": 2924,
+        "fp": 0,
+        "fn": 115,
+        "tn": 1409,
+        "precision": 1.0,
+        "recall": 0.9622,
+        "f1": 0.9807,
+        "false_positive_rate": 0.0,
+        "brier": 0.0189,
+        "roc_auc": 0.9995,
+        "pr_auc": 0.9998
+      },
+      "real": {
+        "threshold": 0.5,
+        "n": 94,
+        "positives": 94,
+        "tp": 87,
+        "fp": 0,
+        "fn": 7,
+        "tn": 0,
+        "precision": 1.0,
+        "recall": 0.9255,
+        "f1": 0.9613,
+        "false_positive_rate": null,
+        "brier": 0.0793,
+        "roc_auc": null,
+        "pr_auc": null
+      }
+    }
+  },
+  "examples": [
+    {
+      "text": "Chevron Nigeria 2026 graduate trainee programme. Apply at https://chevronportal.cc/portal?id=21XuRl. A refundable NGN 3,500 registration fee is required.",
+      "label": 1,
+      "stripped": "Chevron Nigeria 2026 graduate trainee programme. Apply at [URL]. A refundable NGN 3,500 registration fee is required.",
+      "prob_A": 0.5673,
+      "prob_C": 0.4366,
+      "pred_A": 1,
+      "pred_C": 0,
+      "links_found": [
+        "https://chevronportal.cc/portal?id=21XuRl"
+      ]
+    },
+    {
+      "text": "Hello Zainab, we are from Access Bank. Please send the code you just received so we can reverse the wrong debit of NGN 232,500.",
+      "label": 1,
+      "stripped": "Hello Zainab, we are from Access Bank. Please send the code you just received so we can reverse the wrong debit of NGN 232,500.",
+      "prob_A": 0.5636,
+      "prob_C": 0.4884,
+      "pred_A": 1,
+      "pred_C": 0,
+      "links_found": []
+    },
+    {
+      "text": "You received NGN 173,500 from Aisha. Claim it before it expires: http://accessbankhelp.vip",
+      "label": 1,
+      "stripped": "You received NGN 173,500 from Aisha. Claim it before it expires: [URL]",
+      "prob_A": 0.5091,
+      "prob_C": 0.265,
+      "pred_A": 1,
+      "pred_C": 0,
+      "links_found": [
+        "http://accessbankhelp.vip"
+      ]
+    },
+    {
+      "text": "Chevron Nigeria 2026 graduate trainee programme. Apply at http://chevr0n.com. A refundable NGN 8,500 registration fee is required.",
+      "label": 1,
+      "stripped": "Chevron Nigeria 2026 graduate trainee programme. Apply at [URL]. A refundable NGN 8,500 registration fee is required.",
+      "prob_A": 0.6149,
+      "prob_C": 0.4313,
+      "pred_A": 1,
+      "pred_C": 0,
+      "links_found": [
+        "http://chevr0n.com"
+      ]
+    },
+    {
+      "text": "Hello Zainab, we are from Access Bank. Please send the code you just received so we can reverse the wrong debit of NGN 39,500.",
+      "label": 1,
+      "stripped": "Hello Zainab, we are from Access Bank. Please send the code you just received so we can reverse the wrong debit of NGN 39,500.",
+      "prob_A": 0.5682,
+      "prob_C": 0.4949,
+      "pred_A": 1,
+      "pred_C": 0,
+      "links_found": []
+    },
+    {
+      "text": "Dangote Nigeria 2026 graduate trainee programme. Apply at http://dangote-confirm.com/confirm. A refundable NGN 13,000 registration fee is required.",
+      "label": 1,
+      "stripped": "Dangote Nigeria 2026 graduate trainee programme. Apply at [URL]. A refundable NGN 13,000 registration fee is required.",
+      "prob_A": 0.8082,
+      "prob_C": 0.4703,
+      "pred_A": 1,
+      "pred_C": 0,
+      "links_found": [
+        "http://dangote-confirm.com/confirm"
+      ]
+    },
+    {
+      "text": "Chevron Nigeria 2026 graduate trainee programme. Apply at tinyurl.com/CZEWtvN. A refundable NGN 11,500 registration fee is required.",
+      "label": 1,
+      "stripped": "Chevron Nigeria 2026 graduate trainee programme. Apply at [URL]. A refundable NGN 11,500 registration fee is required.",
+      "prob_A": 0.6476,
+      "prob_C": 0.4581,
+      "pred_A": 1,
+      "pred_C": 0,
+      "links_found": [
+        "tinyurl.com/CZEWtvN"
+      ]
+    },
+    {
+      "text": "Hello Damilola, we are from Wema Bank. Please send the code you just received so we can reverse the wrong debit of NGN 58,000.",
+      "label": 1,
+      "stripped": "Hello Damilola, we are from Wema Bank. Please send the code you just received so we can reverse the wrong debit of NGN 58,000.",
+      "prob_A": 0.5173,
+      "prob_C": 0.4425,
+      "pred_A": 1,
+      "pred_C": 0,
+      "links_found": []
+    },
+    {
+      "text": "You received NGN 43,000 from Hauwa. Claim it before it expires: http://secure-uba.com",
+      "label": 1,
+      "stripped": "You received NGN 43,000 from Hauwa. Claim it before it expires: [URL]",
+      "prob_A": 0.5049,
+      "prob_C": 0.2883,
+      "pred_A": 1,
+      "pred_C": 0,
+      "links_found": [
+        "http://secure-uba.com"
+      ]
+    },
+    {
+      "text": "Dangote Nigeria 2026 graduate trainee programme. Apply at http://dangote-ng.com. A refundable NGN 3,500 registration fee is required.",
+      "label": 1,
+      "stripped": "Dangote Nigeria 2026 graduate trainee programme. Apply at [URL]. A refundable NGN 3,500 registration fee is required.",
+      "prob_A": 0.6407,
+      "prob_C": 0.4452,
+      "pred_A": 1,
+      "pred_C": 0,
+      "links_found": [
+        "http://dangote-ng.com"
+      ]
+    }
+  ],
+  "conclusion": [
+    "NO COLLAPSE: Run C stays close to Run A (PR-AUC change 0.00 points if defined; real recall change 0.01). The model learns from wording, not only from links."
+  ],
+  "drops": {
+    "run_B_pr_drop": 0.0004999999999999449,
+    "run_C_pr_drop": 0.00019999999999997797,
+    "run_B_real_drop": 0.0,
+    "run_C_real_drop": 0.010700000000000043
+  }
+}

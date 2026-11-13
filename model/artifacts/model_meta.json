@@ -1,0 +1,57 @@
+{
+  "chosen_model": "linear_svm",
+  "seed": 42,
+  "candidate_comparison": [
+    {
+      "model": "linear_svm",
+      "validation_precision": 0.9962,
+      "validation_recall": 0.9599,
+      "validation_pr_auc": 0.9978,
+      "validation_fpr": 0.0078,
+      "tp": 2917,
+      "fp": 11,
+      "fn": 122,
+      "tn": 1397
+    },
+    {
+      "model": "logistic_regression",
+      "validation_precision": 0.9721,
+      "validation_recall": 0.9753,
+      "validation_pr_auc": 0.9963,
+      "validation_fpr": 0.0604,
+      "tp": 2964,
+      "fp": 85,
+      "fn": 75,
+      "tn": 1323
+    },
+    {
+      "model": "naive_bayes",
+      "validation_precision": 0.9891,
+      "validation_recall": 0.952,
+      "validation_pr_auc": 0.9913,
+      "validation_fpr": 0.0227,
+      "tp": 2893,
+      "fp": 32,
+      "fn": 146,
+      "tn": 1376
+    }
+  ],
+  "thresholds": {
+    "high_score": 0.334,
+    "low_score": 0.333,
+    "high_precision_target": 0.95,
+    "low_scams_recall_target": 0.99,
+    "validation_precision_at_high": 0.9516,
+    "validation_scam_recall_above_low": 0.9918
+  },
+  "trained_on": "train split only (validation used for selection)",
+  "link_features": [
+    "has_link",
+    "n_links",
+    "is_shortener",
+    "hyphen_host",
+    "n_subdomains",
+    "digit_in_host",
+    "tld_risk"
+  ]
+}
